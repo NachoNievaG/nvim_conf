@@ -144,4 +144,11 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
     config = function() require("todo-comments").setup {} end
   },
+
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 }

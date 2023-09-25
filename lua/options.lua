@@ -37,8 +37,7 @@ o.timeoutlen = 50
 o.foldmethod = "indent"
 o.foldnestmax = 3
 o.foldlevelstart = 99
-o.timeoutlen = 150
-o.ttimeoutlen = 150
+vim.g.timeoutlen = 150
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,
