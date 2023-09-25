@@ -8,7 +8,7 @@ local opts = {
 }
 
 local mappings = {
-  ["e"] = { "<cmd>Telescope buffers<cr>", "Explorer" },
+  ["e"] = { "<CMD>Oil<CR>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q<CR>", "Quit" },
   ["W"] = { "<cmd>wa!<CR>", "Save & quit" },
@@ -80,10 +80,23 @@ return {
     require('which-key').setup({
 
     plugins={
-    marks = true,       -- shows a list of your marks on ' and `
-    registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-    presets={z=false, n=false, o=false, s=false, i=false, c=false, l=false, t=false},
-    },
+      marks = false, -- shows a list of your marks on ' and `
+      registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+      -- No actual key bindings are created
+      spelling = {
+        enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      },
+      presets = {
+            operators = false, -- adds help for operators like d, y, ...
+            motions = false, -- adds help for motions
+            text_objects = false, -- help for text objects triggered after entering an operator
+            windows = false, -- default bindings on <c-w>
+            nav = false, -- misc bindings to work with windows
+            z = false, -- bindings for folds, spelling and others prefixed with z
+            g = false, -- bindings for prefixed with g
+          },
+      },
     })
 
     require('which-key').register(mappings, opts)
