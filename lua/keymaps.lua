@@ -58,7 +58,7 @@ vim.keymap.set("n", "gr", builtin.lsp_references, { noremap = true, silent = tru
 vim.keymap.set("n", "gi", builtin.lsp_implementations, { noremap = true, silent = true })
 vim.keymap.set("n", "gd", builtin.lsp_definitions, { noremap = true, silent = true })
 vim.keymap.set("n", "gb", builtin.buffers, opts)
-keymap("n","<leader>la",  "<cmd>vim.lsp.buf.code_action()<CR>", opts)
+keymap("n","<leader>la",  "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
 keymap("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
 keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
