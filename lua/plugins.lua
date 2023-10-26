@@ -4,7 +4,7 @@ return {
   { "christoomey/vim-tmux-navigator" },
   { "olimorris/onedarkpro.nvim",              priority = 1000 },
   { "github/copilot.vim" },
-  { "ellisonleao/gruvbox.nvim", priority = 1000 },  --
+  { "rebelot/kanagawa.nvim", priority = 1000 },  --
   -- Setup based
   {
     "theprimeagen/harpoon",

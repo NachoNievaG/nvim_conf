@@ -22,6 +22,11 @@ keymap("n", "<leader>7", ":lua require('harpoon.ui').nav_file(7)<CR>", opts)
 keymap("n", "<leader>8", ":lua require('harpoon.ui').nav_file(8)<CR>", opts)
 keymap("n", "<leader>9", ":lua require('harpoon.ui').nav_file(9)<CR>", opts)
 
+-- Navigate harpooned
+keymap("n", "<S-l>", ":lua require('harpoon.ui').nav_next()<CR>", opts)
+keymap("n", "<S-h>", ":lua require('harpoon.ui').nav_prev()<CR>", opts)
+--
+
 keymap("n", "n", "nzzzv", opts)
 keymap("n", "N", "Nzzzv", opts)
 keymap("n", "{", "{zzzv", opts)
