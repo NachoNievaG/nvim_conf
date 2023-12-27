@@ -2,9 +2,9 @@ return {
   -- Oneliners
   { "nvim-telescope/telescope-ui-select.nvim" },
   { "christoomey/vim-tmux-navigator" },
-  { "olimorris/onedarkpro.nvim",              priority = 1000 },
   { "github/copilot.vim" },
   { "rebelot/kanagawa.nvim", priority = 1000 },  --
+  { 'simrat39/rust-tools.nvim'},
   -- Setup based
   {
     "theprimeagen/harpoon",
@@ -93,8 +93,6 @@ return {
       'williamboman/mason-lspconfig.nvim',
     },
     config = function()
-      require('lsp-zero').setup()
-
       local lsp_zero = require('lsp-zero')
 
       lsp_zero.extend_lspconfig()
@@ -102,9 +100,16 @@ return {
         lsp_zero.default_keymaps({ buffer = bufnr })
       end)
 
+      local rust_lsp = lsp_zero.build_options('rust_analyzer', {})
+
+
+      lsp_zero.setup()
+      -- Initialize rust_analyzer with rust-tools
+      require('rust-tools').setup({server = rust_lsp})
+
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        ensure_installed = {},
+        ensure_installed = {"gopls","dockerls", "bashls","lua_ls",},
         handlers = {
           lsp_zero.default_setup,
         },
@@ -149,5 +154,16 @@ return {
     opts = {},
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    'NvChad/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {}
   },
 }

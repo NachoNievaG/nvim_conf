@@ -8,6 +8,9 @@ local opts = {
 }
 
 local mappings = {
+  ["c"] = { "<CMD>lua require('close_buffers').delete({type = 'this'})<CR>", "Close buffer"},
+  ["n"] = { "<CMD>lua require('close_buffers').delete({type = 'nameless'})<CR>", "Close no name"},
+  ["o"] = { "<CMD>lua require('close_buffers').delete({type = 'other'})<CR>", "Close other buffers"},
   ["e"] = { "<CMD>Oil<CR>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q<CR>", "Quit" },
@@ -18,15 +21,15 @@ local mappings = {
   f = {
     name = "Telescope",
     f = {"<cmd>Telescope find_files <cr>", "Find files"},
-    w = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-    h = { "<cmd>Telescope help_tags theme=ivy<cr>", "Find Help" },
+    w = { "<cmd>Telescope live_grep <cr>", "Find Text" },
+    h = { "<cmd>Telescope help_tags <cr>", "Find Help" },
     d = { "<cmd>Telescope diagnostics <cr>", "Find Diagnostics" },
     p = { "<cmd>TodoTelescope keywords=TODO,FIX <cr>", "Find Pendings" },
     n = { "<cmd>TodoTelescope keywords=NOTE,INFO <cr>", "Find Annotations" },
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    b = { "<cmd>Telescope buffers<cr>", "Find buffers" },
     s = { "<cmd>Telescope git_status<cr>", "Git Status" },
     S = { "<cmd>Telescope git_stash<cr>", "Git Stash" },
-    c = { "<cmd>Telescope git_commits<cr>", "Git Commits" },
+    c = { "<cmd>Telescope commands<cr>", "Find Commands" },
     C = { "<cmd>Telescope git_bcommits<cr>", "Git Commits" },
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
@@ -40,6 +43,16 @@ local mappings = {
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
     d = {"<cmd>Gvdiffsplit<cr>","Diff"},
     g = {"<cmd>LazyGit<cr>","LazyGit"},
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    u = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
+    },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
   },
   x = {
     name = "Debugger",
@@ -72,7 +85,6 @@ local mappings = {
     b = { "<cmd>DBUIToggle<cr>", "Toggle" },
   }
 }
-
 
 return {
   "folke/which-key.nvim",
