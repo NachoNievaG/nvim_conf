@@ -39,33 +39,33 @@ o.foldnestmax = 3
 o.foldlevelstart = 99
 vim.g.timeoutlen = 150
 vim.diagnostic.config({
-  virtual_text = false,
-  signs = true,
-  underline = true,
-  update_in_insert = true,
-  severity_sort = false,
+	virtual_text = false,
+	signs = true,
+	underline = true,
+	update_in_insert = true,
+	severity_sort = false,
 })
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-o.shortmess:append "c"
+o.shortmess:append("c")
 
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
 })
 vim.o.background = "dark"
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]]
+vim.cmd("set whichwrap+=<,>,[,],h,l")
+vim.cmd([[set iskeyword+=-]])
+vim.cmd([[set formatoptions-=cro]])
 
-vim.cmd[[highlight CopilotSuggestion guifg=#555555 ctermfg=8]]
-vim.cmd[[:command YankFileRelativePath :let @+ = fnamemodify(expand("%"), ":~:.")]]
+vim.cmd([[highlight CopilotSuggestion guifg=#555555 ctermfg=8]])
+vim.cmd([[:command YankFileRelativePath :let @+ = fnamemodify(expand("%"), ":~:.")]])
