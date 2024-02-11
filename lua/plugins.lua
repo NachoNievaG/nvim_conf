@@ -87,7 +87,7 @@ return {
 
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "dev-v3",
+		branch = "v3.x",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -162,8 +162,18 @@ return {
 			require("colorizer").setup()
 		end,
 	},
+
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
+		"kylechui/nvim-surround",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	},
+	{ "folke/neodev.nvim", opts = {} },
+	{
+		"folke/zen-mode.nvim",
+		opts = {},
 	},
 }

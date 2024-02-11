@@ -167,6 +167,10 @@ local mappings = {
 		name = "dadbod",
 		b = { "<cmd>DBUIToggle<cr>", "Toggle" },
 	},
+	j = {
+		name = "json",
+		s = { "<cmd>%!jq '.'<cr>", "Format" },
+	},
 }
 
 return {
