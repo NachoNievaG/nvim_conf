@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("options")
 require("lazy").setup("plugins")
+require("colors")
 require("keymaps")
 
 vim.cmd([[set titlestring=%t%(\ %M%)%(\ \(%{expand(\"%:~:h\")}\)%)%a\ -\ NVIM]])
-vim.cmd([[colorscheme kanagawa]])

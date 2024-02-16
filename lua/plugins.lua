@@ -3,14 +3,69 @@ return {
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	{ "christoomey/vim-tmux-navigator" },
 	{ "github/copilot.vim" },
-	{ "rebelot/kanagawa.nvim", priority = 1000 }, --
+	{ "rebelot/kanagawa.nvim", priority = 1000 },
+	{
+		"ellisonleao/gruvbox.nvim",
+		priority = 1000,
+		config = function()
+			require("gruvbox").setup({
+				contrast = "hard",
+				palette_overrides = {
+					gray = "#2eb542", -- comments are GREEN
+				},
+			})
+		end,
+		opts = ...,
+	},
+	{ "tpope/vim-fugitive" },
+	{ "folke/neodev.nvim", opts = {} },
 	{ "simrat39/rust-tools.nvim" },
+	{
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		config = function()
+			require("lualine").setup({
+				options = {
+					icons_enabled = false,
+					theme = "onedark",
+					component_separators = "|",
+					section_separators = "",
+				},
+			})
+		end,
+	},
 	-- Setup based
 	{
-		"theprimeagen/harpoon",
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("harpoon").setup()
+			local harpoon = require("harpoon")
+			harpoon:setup({})
+
+			-- basic telescope configuration
+			local conf = require("telescope.config").values
+			local function toggle_telescope(harpoon_files)
+				local file_paths = {}
+				for _, item in ipairs(harpoon_files.items) do
+					table.insert(file_paths, item.value)
+				end
+
+				require("telescope.pickers")
+					.new({}, {
+						prompt_title = "Harpoon",
+						finder = require("telescope.finders").new_table({
+							results = file_paths,
+						}),
+						previewer = conf.file_previewer({}),
+						sorter = conf.generic_sorter({}),
+					})
+					:find()
+			end
+
+			vim.keymap.set("n", "<leader>mo", function()
+				toggle_telescope(harpoon:list())
+			end, { desc = "Open harpoon window" })
 		end,
 	},
 	--LSP
@@ -19,22 +74,15 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "lua", "vim", "go", "bash" },
+				modules = {},
+				auto_install = true,
+				sync_install = false,
+				ensure_installed = { "lua", "vim", "go", "bash", "markdown", "markdown_inline" },
+				ignore_install = {},
 				highlight = { enable = true },
 				indent = { enable = true },
 				incremental_selection = { enable = true },
 				refactor = { highlight_definitions = { enable = true } },
-				textobjects = {
-					select = {
-						enable = true,
-						keymaps = {
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-						},
-					},
-				},
 			})
 		end,
 	},
@@ -45,7 +93,6 @@ return {
 			require("gitsigns").setup()
 		end,
 	},
-	{ "tpope/vim-fugitive" },
 
 	{
 		"kdheepak/lazygit.nvim",
@@ -159,7 +206,7 @@ return {
 	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()
-			require("colorizer").setup()
+			require("colorizer").setup({})
 		end,
 	},
 
@@ -171,9 +218,16 @@ return {
 			require("nvim-surround").setup({})
 		end,
 	},
-	{ "folke/neodev.nvim", opts = {} },
 	{
 		"folke/zen-mode.nvim",
 		opts = {},
+	},
+	{
+		"numToStr/Comment.nvim",
+		opts = {},
+		lazy = false,
+		config = function()
+			require("Comment").setup()
+		end,
 	},
 }

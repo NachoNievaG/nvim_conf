@@ -6,6 +6,26 @@ local opts = {
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
 }
+local harpoon = require("harpoon")
+
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+	local file_paths = {}
+	for _, item in ipairs(harpoon_files.items) do
+		table.insert(file_paths, item.value)
+	end
+
+	require("telescope.pickers")
+		.new({}, {
+			prompt_title = "Harpoon",
+			finder = require("telescope.finders").new_table({
+				results = file_paths,
+			}),
+			previewer = conf.file_previewer({}),
+			sorter = conf.generic_sorter({}),
+		})
+		:find()
+end
 
 local mappings = {
 	["c"] = { "<CMD>lua require('close_buffers').delete({type = 'this'})<CR>", "Close buffer" },
@@ -152,13 +172,13 @@ local mappings = {
 		name = "Harpoon",
 		a = {
 			function()
-				require("harpoon.mark").add_file()
+				harpoon:list():append()
 			end,
 			"Add File",
 		},
 		o = {
 			function()
-				require("harpoon.ui").toggle_quick_menu()
+				toggle_telescope(harpoon:list())
 			end,
 			"Menu",
 		},
