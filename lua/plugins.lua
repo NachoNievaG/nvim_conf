@@ -182,11 +182,28 @@ return {
 	-- db
 	{
 		"kristijanhusak/vim-dadbod-ui",
-		dependencies = { "tpope/vim-dadbod" },
+		dependencies = { "tpope/vim-dadbod", "kristijanhusak/vim-dadbod-completion", "tpope/vim-dotenv" },
 		config = function()
-			vim.g.db_ui_force_echo_notifications = 0
-			vim.g.db_ui_save_location = os.getenv("HOME") .. "/.config/db_ui_queries"
-			vim.g.db_ui_auto_execute_table_helpers = 1
+			local function db_completion()
+				require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
+			end
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"sql",
+				},
+				command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+			})
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"sql",
+					"mysql",
+					"plsql",
+				},
+				callback = function()
+					vim.schedule(db_completion)
+				end,
+			})
 		end,
 	},
 	{
