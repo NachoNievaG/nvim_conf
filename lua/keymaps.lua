@@ -10,16 +10,6 @@ keymap("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", opts)
 keymap("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", opts)
 keymap("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", opts)
 keymap("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", opts)
--- Harpoon
-keymap("n", "<leader>1", ":lua require('harpoon'):list():select(1)<CR>", opts)
-keymap("n", "<leader>2", ":lua require('harpoon'):list():select(2)<CR>", opts)
-keymap("n", "<leader>3", ":lua require('harpoon'):list():select(3)<CR>", opts)
-keymap("n", "<leader>4", ":lua require('harpoon'):list():select(4)<CR>", opts)
-keymap("n", "<leader>5", ":lua require('harpoon'):list():select(5)<CR>", opts)
-keymap("n", "<leader>6", ":lua require('harpoon'):list():select(6)<CR>", opts)
-keymap("n", "<leader>7", ":lua require('harpoon'):list():select(7)<CR>", opts)
-keymap("n", "<leader>8", ":lua require('harpoon'):list():select(8)<CR>", opts)
-keymap("n", "<leader>9", ":lua require('harpoon'):list():select(9)<CR>", opts)
 
 -- Navigate harpooned
 keymap("n", "<S-l>", ":lua require('harpoon'):list():prev()<CR>", opts)

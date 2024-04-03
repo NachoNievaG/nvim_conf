@@ -7,27 +7,17 @@ local opts = {
 	nowait = true, -- use `nowait` when creating keymaps
 }
 local harpoon = require("harpoon")
-
-local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
-	local file_paths = {}
-	for _, item in ipairs(harpoon_files.items) do
-		table.insert(file_paths, item.value)
-	end
-
-	require("telescope.pickers")
-		.new({}, {
-			prompt_title = "Harpoon",
-			finder = require("telescope.finders").new_table({
-				results = file_paths,
-			}),
-			previewer = conf.file_previewer({}),
-			sorter = conf.generic_sorter({}),
-		})
-		:find()
-end
-
 local mappings = {
+	["1"] = { "<CMD>lua require('harpoon'):list():select(1)<CR>", "which_key_ignore" },
+	["2"] = { "<CMD>lua require('harpoon'):list():select(2)<CR>", "which_key_ignore" },
+	["3"] = { "<CMD>lua require('harpoon'):list():select(3)<CR>", "which_key_ignore" },
+	["4"] = { "<CMD>lua require('harpoon'):list():select(4)<CR>", "which_key_ignore" },
+	["5"] = { "<CMD>lua require('harpoon'):list():select(5)<CR>", "which_key_ignore" },
+	["6"] = { "<CMD>lua require('harpoon'):list():select(6)<CR>", "which_key_ignore" },
+	["7"] = { "<CMD>lua require('harpoon'):list():select(7)<CR>", "which_key_ignore" },
+	["8"] = { "<CMD>lua require('harpoon'):list():select(8)<CR>", "which_key_ignore" },
+	["9"] = { "<CMD>lua require('harpoon'):list():select(9)<CR>", "which_key_ignore" },
+
 	["c"] = { "<CMD>lua require('close_buffers').delete({type = 'this'})<CR>", "Close buffer" },
 	["n"] = { "<CMD>lua require('close_buffers').delete({type = 'nameless'})<CR>", "Close no name" },
 	["o"] = { "<CMD>lua require('close_buffers').delete({type = 'other'})<CR>", "Close other buffers" },
@@ -73,6 +63,7 @@ local mappings = {
 			"Undo Stage Hunk",
 		},
 		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+		P = { "<cmd>Lazydocker<cr>", "LazyDocker" },
 	},
 	x = {
 		name = "Debugger",

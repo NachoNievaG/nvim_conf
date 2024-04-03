@@ -54,13 +54,19 @@ return {
 				modules = {},
 				auto_install = true,
 				sync_install = false,
-				ensure_installed = { "lua", "vim", "go", "bash", "markdown", "markdown_inline" },
+				ensure_installed = { "lua", "vim", "go", "bash", "markdown", "markdown_inline", "sql" },
 				ignore_install = {},
 				highlight = { enable = true },
 				indent = { enable = true },
 				incremental_selection = { enable = true },
 				refactor = { highlight_definitions = { enable = true } },
+				vim.filetype.add({
+					extension = {
+						tmpl = "tmpl",
+					},
+				}),
 			})
+			vim.treesitter.language.register("sql", "tmpl")
 		end,
 	},
 	-- Git
@@ -232,5 +238,14 @@ return {
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
+	},
+	-- lazydocker.nvim
+	{
+		"mgierada/lazydocker.nvim",
+		dependencies = { "akinsho/toggleterm.nvim" },
+		config = function()
+			require("lazydocker").setup({})
+		end,
+		event = "BufRead", -- or any other event you might want to use.
 	},
 }
