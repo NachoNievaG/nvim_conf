@@ -178,7 +178,7 @@ local mappings = {
 		},
 		o = {
 			function()
-				toggle_telescope(harpoon:list())
+				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
 			"Menu",
 		},

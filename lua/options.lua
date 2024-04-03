@@ -39,6 +39,7 @@ o.foldmethod = "indent"
 o.foldnestmax = 3
 o.foldlevelstart = 99
 vim.g.timeoutlen = 150
+vim.g.vimtex_view_method = "zathura"
 vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
@@ -67,6 +68,7 @@ vim.o.background = "dark"
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 vim.cmd([[set formatoptions-=cro]])
+vim.cmd([[set fo-=r]])
 
 vim.cmd([[highlight CopilotSuggestion guifg=#555555 ctermfg=8]])
 vim.cmd([[:command YankFileRelativePath :let @+ = fnamemodify(expand("%"), ":~:.")]])

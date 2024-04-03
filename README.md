@@ -9,3 +9,12 @@
 
 ![2](assets/2.png)
 ![1](assets/1.png)
+
+## Dependencies
+
+- git
+- ripgrep
+
+## Installation
+
+
